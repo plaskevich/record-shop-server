@@ -1,0 +1,78 @@
+type Query {
+  getRecord(id: String!): Record
+  getAllRecords: [Record]
+  getStockRecords: [Record]
+  getSoldRecords: [Record]
+}
+
+type Mutation {
+  signUp(data: UserInput!): AuthData
+  signIn(data: LoginInput): AuthData
+  addShop(name: String!): Shop
+  addRecord(data: RecordInput!): Record
+  editRecord(id: String!, data: RecordInput!): Record
+  setInStock(id: String!): Record
+  setSold(id: String!): Record
+  removeRecord(id: String!): Record
+}
+
+input LoginInput {
+  email: String
+  password: String
+}
+
+input UserInput {
+  email: String
+  password: String
+  name: String
+}
+
+input RecordInput {
+  artist: String
+  title: String
+  status: Status
+  label: String
+  condition: String
+  genre: String
+  price: String
+  year: Int
+  notes: String
+  img_uri: String
+}
+
+type AuthData {
+  token: String
+  user: User
+}
+
+type User {
+  id: String
+  email: String
+  name: String
+  shop: String
+}
+
+type Shop {
+  id: String
+  name: String
+}
+
+type Record {
+  id: String
+  artist: String
+  title: String
+  label: String
+  status: String
+  condition: String
+  genre: String
+  date_added: String
+  price: String
+  year: Int
+  notes: String
+  img_uri: String
+}
+
+enum Status {
+  sold
+  inStock
+}
