@@ -1,4 +1,4 @@
-import config from '../config';
+import config from './config';
 import { GraphQLServer } from 'graphql-yoga';
 import { resolvers } from './resolvers';
 import { UserModel } from './models/User';
