@@ -13,6 +13,7 @@ export async function getRecord(
   return record;
 }
 export async function getAllRecords(_: any, data: any, { currentUser }: any) {
+  console.log(currentUser);
   if (!currentUser) throw new Error('Invalid user');
   const records = await RecordModel.find({ shop: currentUser.shop });
   if (!records) return new Error('Records not found');
