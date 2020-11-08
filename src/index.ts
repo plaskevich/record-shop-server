@@ -24,14 +24,14 @@ mongoose.connection.on('error', () => {
 
 const context = async (req: any) => {
   const { request } = req;
-  console.log(request.headers.authorization);
+  console.log(request.headers);
   // get the user token from the headers
   const token = request.headers.authorization;
   // try to retrieve a user with the token
   if (token) {
-    console.log('Tok ', token)
+    // console.log('Tok ', token)
     const currentUser = await getUserByToken(token);
-    console.log("cur ", currentUser)
+    // console.log("cur ", currentUser)
 
     return { currentUser };
   } else return null;
