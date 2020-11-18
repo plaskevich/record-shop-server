@@ -3,6 +3,8 @@ type Query {
   getAllRecords: [Record]
   getStockRecords: [Record]
   getSoldRecords: [Record]
+  getShop(id: String!): Shop
+  getGenreStatistics: [GenreStatistic]
 }
 
 type Mutation {
@@ -14,6 +16,8 @@ type Mutation {
   setInStock(id: String!): Record
   setSold(id: String!): Record
   removeRecord(id: String!): Record
+  addUserToShop(shopId: String!, userId: String!, role: String!): Shop
+  changeUserRole(shopId: String!, userId: String!, role: String!): Shop
 }
 
 input LoginInput {
@@ -55,6 +59,7 @@ type User {
 type Shop {
   id: String
   name: String
+  users: [ShopUser]
 }
 
 type Record {
@@ -72,7 +77,23 @@ type Record {
   img_uri: String
 }
 
+type ShopUser {
+  userId: String
+  role: UserRole
+}
+
+type GenreStatistic {
+  genre: String
+  records: [String]
+  percent: Int
+}
+
 enum Status {
   sold
   inStock
+}
+
+enum UserRole {
+  admin
+  regular
 }
