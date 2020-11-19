@@ -1,4 +1,4 @@
-# Collection-Management
+# Collection Management
 
 ## Add Record
 
@@ -7,7 +7,7 @@ Mutation `addRecord` takes `data` as parameter, which should include: [Record Ob
 Returns:
 
 - `token` - Authentication token
-- `user` - [User Object](../Representation/Representation.md#user-object)
+- `user` - [User Object](../Other/Jopa.md)
 
 #### Example
 
