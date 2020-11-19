@@ -10,7 +10,7 @@ Mutation `signUp` takes parameters:
 Returns:
 
 - `token` - Authentication token
-- `user` - [User Object](https://record-shop.stoplight.io/docs/record-shop-server/docs/Mutations/Authorization.md#sign-up)
+- `user` - [User Object](../Representation/Representation.md#user-object)
 
 #### Example
 
@@ -39,7 +39,7 @@ Mutation `login` takes parameters:
 Returns:
 
 - `token` - Authentication token
-- `user` - User Object
+- `user` - [User Object](../Objects/Objects.md#user-object)
 
 #### Example
 
