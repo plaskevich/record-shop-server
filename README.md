@@ -1,7 +1,8 @@
 # Record Shop Server
 
-GraphQL server for my [Record Shop app](https://github.com/plaskevich/record-shop)
+GraphQL server for [Record Shop](https://github.com/plaskevich/record-shop)
 
+#### Live server can be accessed at https://record-shop-server.herokuapp.com/
 ## Run app locally
 ### 1. Install dependencies
 `npm i`
@@ -19,3 +20,5 @@ After this the server can be used with the link: `http://localhost:<port>/`,
 where <port> is the port number that is assigned in `.env` file.
 
 To access GraphQL playground, just open that link in browser.
+
+### For more information, check [API Documentation](https://record-shop.stoplight.io)
