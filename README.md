@@ -8,7 +8,7 @@ GraphQL server for [Record Shop](https://github.com/plaskevich/record-shop)
 `npm i`
 ### 2. Set credentials
 1. In the root of the project create a file named `.env`
-2. Set the .env file with credentials:
+2. Set the `.env` file with credentials:
 ```
 PORT = <port>
 MONGO_URI = <link to mongodb>
