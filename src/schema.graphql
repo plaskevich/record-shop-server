@@ -6,25 +6,14 @@ type Query {
 }
 
 type Mutation {
-  signUp(data: UserInput!): AuthData
-  signIn(data: LoginInput): AuthData
+  signUp(email: String, password: String, name: String): AuthData
+  signIn(email: String, password: String): AuthData
   addShop(name: String!): Shop
   addRecord(data: RecordInput!): Record
   editRecord(id: String!, data: RecordInput!): Record
   setInStock(id: String!): Record
   setSold(id: String!): Record
   removeRecord(id: String!): Record
-}
-
-input LoginInput {
-  email: String
-  password: String
-}
-
-input UserInput {
-  email: String
-  password: String
-  name: String
 }
 
 input RecordInput {
