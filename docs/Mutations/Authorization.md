@@ -10,7 +10,7 @@ Mutation `signUp` takes parameters:
 Returns:
 
 - `token` - Authentication token
-- `user` - [User Object](docs/Other/Representations.md)
+- `user` - [User](../Other/Input-types.md#user)
 
 #### Example
 
