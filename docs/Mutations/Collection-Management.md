@@ -3,7 +3,7 @@
 ## Add Record
 
 Mutation `addRecord` takes parameters:
-- `data`: [Record](../Other/Input-types#record)
+- `data`: [Record](../Other/Input-types.md#record)
 
 Returns:
 -  [Record Object](../Other/Representations.md#record-object)
@@ -31,7 +31,7 @@ mutation {
 
 Mutation `editRecord` takes parameters:
 - `id`: String
-- `data`: [Record](../Other/Input-types#record)
+- `data`: [Record](../Other/Input-types.md#record)
 
 Returns:
 -  [Record Object](../Other/Representations.md#record-object)
