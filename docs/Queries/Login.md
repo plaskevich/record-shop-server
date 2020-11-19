@@ -1,7 +1,3 @@
----
-tags: [login]
----
-
-# Login
+## Login
 
 The beginning of an awesome article...
