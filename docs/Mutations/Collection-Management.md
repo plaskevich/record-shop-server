@@ -3,10 +3,10 @@
 ## Add Record
 
 Mutation `addRecord` takes parameters:
-- `data`: [Record](../Other/Input-types.md#record)
+- `data`: [Record](../Representation/Input-types.md#record)
 
 Returns:
--  [Record Object](../Other/Representations.md#record-object)
+-  [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -31,10 +31,10 @@ mutation {
 
 Mutation `editRecord` takes parameters:
 - `id`: String
-- `data`: [Record](../Other/Input-types.md#record)
+- `data`: [Record](../Representation/Input-types.md#record)
 
 Returns:
--  [Record Object](../Other/Representations.md#record-object)
+-  [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -60,7 +60,7 @@ Mutation `removeRecord` takes parameters:
 - `id`: String
 
 Returns:
--  [Record Object](../Other/Representations.md#record-object)
+-  [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -75,7 +75,7 @@ Mutation `setInStock` takes parameters:
 - `id`: String
 
 Returns:
--  [Record Object](../Other/Representations.md#record-object)
+-  [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -91,7 +91,7 @@ Mutation `setSold` takes parameters:
 - `id`: String
 
 Returns:
--  [Record Object](../Other/Representations.md#record-object)
+-  [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 

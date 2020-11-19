@@ -4,7 +4,7 @@
 
 Query `getAllRecords` returns:
 
-- Array of [Record Objects](../Other/Representations.md#record-object)
+- Array of [Record Objects](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -20,7 +20,7 @@ Query `getRecord` takes parameters:
 - `id`: String
 
 Returns: 
-- [Record Object](../Other/Representations.md#record-object)
+- [Record Object](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -34,7 +34,7 @@ query {
 
 Query `getStockRecords` returns:
 
-- Array of [Record Objects](../Other/Representations.md#record-object)
+- Array of [Record Objects](../Representation/Objects.md#record-object)
 
 #### Example
 
@@ -47,7 +47,7 @@ query {
 
 Query `getSoldRecords` returns:
 
-- Array of [Record Objects](../Other/Representations.md#record-object)
+- Array of [Record Objects](../Representation/Objects.md#record-object)
 
 #### Example
 

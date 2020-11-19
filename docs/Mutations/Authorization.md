@@ -10,7 +10,7 @@ Mutation `signUp` takes parameters:
 Returns:
 
 - `token` - Authentication token
-- `user` - [User](../Other/Representations.md#user)
+- `user` - [User](../Representation/Objects.md#user)
 
 #### Example
 
@@ -39,7 +39,7 @@ Mutation `login` takes parameters:
 Returns:
 
 - `token` - Authentication token
-- `user` - [User Object](../Other/Representations.md#user-object)
+- `user` - [User Object](../Representation/Objects.md#user-object)
 
 #### Example
 
