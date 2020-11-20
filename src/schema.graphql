@@ -3,11 +3,12 @@ type Query {
   getAllRecords: [Record]
   getStockRecords: [Record]
   getSoldRecords: [Record]
+  getGenreStatistics: [GenreStatistic]
 }
 
 type Mutation {
-  signUp(email: String, password: String, name: String): AuthData
-  signIn(email: String, password: String): AuthData
+ signUp(email: String!, password: String!, name: String): AuthData
+  signIn(email: String!, password: String!): AuthData
   addShop(name: String!): Shop
   addRecord(data: RecordInput!): Record
   editRecord(id: String!, data: RecordInput!): Record
@@ -59,6 +60,12 @@ type Record {
   year: Int
   notes: String
   img_uri: String
+}
+
+type GenreStatistic {
+  genre: String
+  records: [String]
+  percent: Int
 }
 
 enum Status {
