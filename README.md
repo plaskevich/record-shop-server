@@ -24,10 +24,19 @@ where <port> is the port number that is assigned in `.env` file.
 
 To access GraphQL playground, just open that link in browser.
 
-## Credentials
+## How to test
 
-In order to test the app following credentials can be used to sign in:
+### 1. Sign in
+
+In order to test the app,  sing in in the playground with `signIn` mutation, using following credentidals:
 ```
 email: test@user.com
 password: worstpass
+```
+### 2. Use token
+Copy the returned token and then paste it in the HTTP Headers:
+```
+{
+  "Authorization": "Bearer <token>"
+}
 ```
