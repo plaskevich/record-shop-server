@@ -23,3 +23,11 @@ After this the server can be used with the link: `http://localhost:<port>/`,
 where <port> is the port number that is assigned in `.env` file.
 
 To access GraphQL playground, just open that link in browser.
+
+## Credentials
+
+In order to test the app following credentials can be used to sign in:
+```
+email: test@user.com
+password: worstpass
+```
