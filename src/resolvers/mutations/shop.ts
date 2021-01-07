@@ -7,29 +7,47 @@ export async function addShop(_: any, { name }: { name: string }) {
   return newShop;
 }
 
-export async function addUserToShop(_: any, { shopId, userId, role }: { shopId: string, userId: string, role: string }, { currentUser }: any) {
-  const shop = await ShopModel.findById(shopId)
-  if (shop?.users.some(item => item.userId === currentUser.id && item.role === 'admin')) {
-    if (shop?.users.some(item => item.userId === userId)) {
-      throw new Error('User already added')
-    } else {
-      const user = await UserModel.findById(userId)
-      if (!user) throw new Error('User you are trying to add does not exist')
-      shop?.users.push({ userId, role })
-      return await shop?.save()
+export async function addUserToShop(_: any, { email, role }: { email: string, role: string }, { currentUser }: any) {
+  if (currentUser.role === 'admin') {
+    const user = await UserModel.findOne({ email })
+    if (user) {
+      user.shop = currentUser.shop
+      user.role = role
+      user.save()
+      return true
     }
   } else {
     throw new Error("You don't have permisson for this operation")
   }
 }
 
-export async function changeUserRole(_: any, { shopId, userId, role }: { shopId: string, userId: string, role: string }, { currentUser }: any) {
-  const shop = await ShopModel.findById(shopId)
-  // if (shop?.users.some(item => item.userId === currentUser.id && item.role === 'admin')){
-  //     return await shop.updateOne({'users.userId': userId}, {'$set': {
-  //          'users.$.role': role
-  //      }}, function(err) { console.log(err) })
-  // } else {
-  //   throw new Error ("You don't have permisson for this operation")
-  // }
+export async function changeUserRole(_: any, { userId, role }: { userId: string, role: string }, { currentUser }: any) {
+  if (currentUser.role === 'admin') {
+    const user = await UserModel.findById(userId)
+    if (user && user.shop === currentUser.shop) {
+      user.role = role
+      user.save()
+      return true
+    } else {
+      throw new Error("User does not belong to your shop")
+    }
+  } else {
+    throw new Error("You don't have permisson for this operation")
+  }
+}
+
+export async function removeUser(_: any, { userId }: { userId: string }, { currentUser }: any) {
+  if (currentUser.role === 'admin') {
+    const user = await UserModel.findById(userId)
+    if (user && user.shop === currentUser.shop) {
+      user.shop = ''
+      user.role = ''
+      user.save()
+      return true
+    } else {
+      throw new Error("User does not belong to your shop")
+    }
+  } else {
+    throw new Error("You don't have permisson for this operation")
+  }
 }
