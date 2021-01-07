@@ -59,7 +59,7 @@ export async function getGenreStatistics(_: any, data: any, { currentUser }: any
     return r;
   }, Object.create(null));
 
-  Object.keys(genreObject).forEach(e => {
+  Object.keys(genreObject).forEach((e: any) => {
     const percent = 100 / (records.length / genreObject[e].length)
     result.push({ genre: e, records: genreObject[e], percent })
   })
