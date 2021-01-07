@@ -43,7 +43,7 @@ export async function getSoldRecords(_: any, data: any, { currentUser }: any) {
 
 export async function getShopUsers(_: any, data: any, { currentUser }: any) {
   const users = await UserModel.find({ shop: currentUser.shop })
-  users.forEach(e => {
+  users.forEach((e: any) => {
     e.id = e._id
   })
   return users
@@ -53,7 +53,7 @@ export async function getGenreStatistics(_: any, data: any, { currentUser }: any
   if (!currentUser) throw new Error('Invalid user');
   const records = await RecordModel.find({ shop: currentUser.shop });
   const result: { genre: string; records: string[]; percent: number }[] = [];
-  const genreObject = records.reduce(function (r, a) {
+  const genreObject = records.reduce(function (r: any, a: any) {
     r[a.genre] = r[a.genre] || [];
     r[a.genre].push(a.id);
     return r;
