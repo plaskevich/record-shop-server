@@ -17,6 +17,7 @@ export async function signUp(_: any, { email, password, name }: { email: string,
 export async function signIn(_: any, { email, password }: { email: string, password: string }) {
   const user = await UserModel.findOne({ email: email });
   if (!user) throw new Error('User was not found');
+  user.id = user._id;
   const compare = await bcrypt.compare(password, user.password);
   if (!compare) throw new Error('Incorrect credentials');
   const token = jwt.sign({ userId: user.id }, 'secret');
