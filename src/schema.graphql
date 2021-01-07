@@ -3,17 +3,33 @@ type Query {
   getAllRecords: [Record]
   getStockRecords: [Record]
   getSoldRecords: [Record]
+  getShopUsers: [User]
   getGenreStatistics: [GenreStatistic]
 }
 
 type Mutation {
-  signUp(email: String, password: String, name: String): AuthData
-  signIn(email: String, password: String): AuthData
+  signUp(email: String!, password: String!, name: String): AuthData
+  signIn(email: String!, password: String!): AuthData
+  addShop(name: String!): Record
   addRecord(data: RecordInput!): Record
   editRecord(id: String!, data: RecordInput!): Record
   setInStock(id: String!): Record
   setSold(id: String!): Record
   removeRecord(id: String!): Record
+  addUserToShop(email: String!, role: UserRole!): Boolean
+  changeUserRole(userId: String!, role: UserRole!): Boolean
+  removeUser(userId: String!): Boolean
+}
+
+input LoginInput {
+  email: String
+  password: String
+}
+
+input UserInput {
+  email: String
+  password: String
+  name: String
 }
 
 input RecordInput {
@@ -39,6 +55,7 @@ type User {
   email: String
   name: String
   shop: String
+  role: String
 }
 
 type Record {
