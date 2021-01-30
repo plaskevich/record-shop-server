@@ -76,7 +76,7 @@ type Record {
 type GenreStatistic {
   genre: String
   records: [String]
-  percent: Int
+  percent: Float
 }
 
 enum Status {
