@@ -10,7 +10,7 @@ type Query {
 type Mutation {
   signUp(email: String!, password: String!, name: String): AuthData
   signIn(email: String!, password: String!): AuthData
-  addShop(name: String!): Record
+  addShop(name: String!): Shop
   addRecord(data: RecordInput!): Record
   editRecord(id: String!, data: RecordInput!): Record
   setInStock(id: String!): Record
@@ -71,6 +71,11 @@ type Record {
   year: Int
   notes: String
   img_uri: String
+}
+
+type Shop {
+  id: String
+  name: String
 }
 
 type GenreStatistic {

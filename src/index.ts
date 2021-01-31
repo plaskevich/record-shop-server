@@ -26,6 +26,7 @@ const context = async (req: any) => {
   const { request } = req;
   // get the user token from the headers
   const token = request.headers.authorization;
+  // console.log(token)
   // try to retrieve a user with the token
   if (token) {
     const currentUser = await getUserByToken(token);
@@ -49,14 +50,15 @@ server.express.use(bodyParser.json());
 server.start({ port: PORT }, async () => {
   console.log(
     '\n🚀\xa0 Server is running on: ' +
-      chalk.hex('#00bfff').underline(`http://localhost:${PORT}\n`),
+    chalk.hex('#00bfff').underline(`http://localhost:${PORT}\n`),
   );
 });
 
-const getUserByToken = async (token: string) => {
+async function getUserByToken(token: string) {
   if (!token) return null;
   token = token.replace('Bearer ', '');
   const userAuth = jwt.verify(token, 'secret');
-  const currentUser = UserModel.findById((<any>userAuth).userId);
+  const currentUser = await UserModel.findById((userAuth as any).userId);
+  if (currentUser) currentUser.id = currentUser._id
   return currentUser;
 };

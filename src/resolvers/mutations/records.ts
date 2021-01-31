@@ -13,6 +13,8 @@ export async function addRecord(_: any, { data }: any, { currentUser }: any) {
 }
 
 export async function editRecord(_: any, { id, data }: any) {
+  const record = await RecordModel.findById(id)
+  if (!record) throw new Error('Record does not exist')
   await RecordModel.updateOne({ _id: mongoose.Types.ObjectId(id) }, data);
   return await RecordModel.findById(id);
 }

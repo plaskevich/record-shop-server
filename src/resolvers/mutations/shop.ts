@@ -1,10 +1,16 @@
 import { UserModel } from '../../models/User';
 import { ShopModel } from '../../models/Shop';
 
-export async function addShop(_: any, { name }: { name: string }) {
+export async function addShop(_: any, { name }: { name: string }, { currentUser }: any) {
   const newShop = new ShopModel({ name });
-  await newShop.save();
-  return newShop;
+  const shop = await newShop.save();
+  const user = await UserModel.findById(currentUser.id)
+  if (user && shop._id) {
+    user.shop = shop._id
+    user.role = 'admin'
+    user.save()
+    return shop
+  } else throw new Error("Something went wrong")
 }
 
 export async function addUserToShop(_: any, { email, role }: { email: string, role: string }, { currentUser }: any) {
