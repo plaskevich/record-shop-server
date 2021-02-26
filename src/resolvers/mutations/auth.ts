@@ -21,7 +21,7 @@ export async function signIn(_: any, { email, password }: { email: string, passw
   if (!email) throw new Error('Email missing')
   if (!password) throw new Error('Password missing')
   const user = await UserModel.findOne({ email: email });
-  if (!user) throw new Error('User was not found');
+  if (!user) throw new Error('Incorrect credentials');
   user.id = user._id;
   const compare = await bcrypt.compare(password, user.password);
   if (!compare) throw new Error('Incorrect credentials');

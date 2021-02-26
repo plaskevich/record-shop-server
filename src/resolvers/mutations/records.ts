@@ -20,6 +20,8 @@ export async function editRecord(_: any, { id, data }: any) {
 }
 
 export async function setInStock(_: any, { id }: { id: string }) {
+  const record = await RecordModel.findById(id)
+  if (!record) throw new Error('Record does not exist')
   await RecordModel.updateOne(
     { _id: mongoose.Types.ObjectId(id) },
     { status: 'inStock' },
@@ -28,6 +30,8 @@ export async function setInStock(_: any, { id }: { id: string }) {
 }
 
 export async function setSold(_: any, { id }: { id: string }) {
+  const record = await RecordModel.findById(id)
+  if (!record) throw new Error('Record does not exist')
   await RecordModel.updateOne(
     { _id: mongoose.Types.ObjectId(id) },
     { status: 'sold' },
@@ -36,6 +40,8 @@ export async function setSold(_: any, { id }: { id: string }) {
 }
 
 export async function removeRecord(_: any, { id }: { id: string }) {
+  const record = await RecordModel.findById(id)
+  if (!record) throw new Error('Record does not exist')
   return RecordModel.findByIdAndDelete(id)
     .exec()
     .then((res: any) => {

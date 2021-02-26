@@ -54,10 +54,10 @@ describe('Auth', () => {
             .toThrow('Email missing');
     });
 
-    it('Throws error when trying to sign in with invalid user', async () => {
+    it('Throws error when trying to sign in with incorrect user', async () => {
         await expect(signInCommand({ email: 'email', password: 'password' }))
             .rejects
-            .toThrow('User was not found');
+            .toThrow('Incorrect credentials');
     });
 
     it('Throws error when trying to sign in with incorrect password', async () => {

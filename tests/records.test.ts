@@ -5,7 +5,7 @@ const recordsService = require('../src/resolvers/mutations/records');
 const { RecordModel } = require('../src/models/Record');
 const { UserModel } = require('../src/models/User');
 
-const { signUpCommand, signInCommand, addShopCommand, addUserToShopCommand } = require('./utils/commands')
+const { signUpCommand, addShopCommand } = require('./utils/commands')
 
 const user = { email: 'test@mail.com', password: '12345' }
 let currentUser: any
@@ -37,13 +37,41 @@ describe('Records', () => {
     });
 
     it('Edits record properly', async () => {
-        const record = await RecordModel.findOne({ title: data.title })
+        const record = await RecordModel.findOne()
         const result = await recordsService.editRecord('', { id: record.id, data: newData }, { currentUser });
         expect(result).toMatchObject(newData)
     });
 
+    it('Sets in stock properly', async () => {
+        const record = await RecordModel.findOne()
+        const result = await recordsService.setInStock('', { id: record.id });
+        expect(result).toHaveProperty('status', 'inStock')
+    });
+
+    it('Sets sold properly', async () => {
+        const record = await RecordModel.findOne()
+        const result = await recordsService.setSold('', { id: record.id });
+        expect(result).toHaveProperty('status', 'sold')
+    });
+
+    it('Removes record properly', async () => {
+        const record = await RecordModel.findOne()
+        const result = await recordsService.removeRecord('', { id: record.id });
+        expect(result).toMatchObject(record)
+        expect(await RecordModel.findById(record.id)).toBeNull
+    });
+
     it('Throws error when ID is invalid', async () => {
         await expect(recordsService.editRecord('', { id: '5f0e40598af527996f888ff1', data }, { currentUser }))
+            .rejects.toThrow('Record does not exist')
+
+        await expect(recordsService.setInStock('', { id: '5f0e40598af527996f888ff1', data }))
+            .rejects.toThrow('Record does not exist')
+
+        await expect(recordsService.setSold('', { id: '5f0e40598af527996f888ff1', data }))
+            .rejects.toThrow('Record does not exist')
+
+        await expect(recordsService.removeRecord('', { id: '5f0e40598af527996f888ff1', data }))
             .rejects.toThrow('Record does not exist')
     });
 });
