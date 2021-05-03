@@ -31,7 +31,7 @@ To access GraphQL playground, just open that link in browser.
 In order to test the app,  sing in in the playground with `signIn` mutation, using following credentidals:
 ```
 email: test@user.com
-password: worstpass
+password: simplepass
 ```
 ### 2. Use token
 Copy the returned token and then paste it in the HTTP Headers:
