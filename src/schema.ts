@@ -1,3 +1,4 @@
+export const typeDefs =  /* GraphQL */ `
 type Query {
   getRecord(id: String!): Record
   getAllRecords: [Record]
@@ -54,7 +55,7 @@ type User {
   id: String
   email: String
   name: String
-  shop: String
+  shop: Shop
   role: String
 }
 
@@ -92,4 +93,4 @@ enum Status {
 enum UserRole {
   admin
   regular
-}
+}`

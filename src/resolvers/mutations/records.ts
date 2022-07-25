@@ -15,7 +15,7 @@ export async function addRecord(_: any, { data }: any, { currentUser }: any) {
 export async function editRecord(_: any, { id, data }: any) {
   const record = await RecordModel.findById(id)
   if (!record) throw new Error('Record does not exist')
-  await RecordModel.updateOne({ _id: mongoose.Types.ObjectId(id) }, data);
+  await RecordModel.updateOne({ _id: new mongoose.Types.ObjectId(id) }, data);
   return await RecordModel.findById(id);
 }
 
@@ -23,7 +23,7 @@ export async function setInStock(_: any, { id }: { id: string }) {
   const record = await RecordModel.findById(id)
   if (!record) throw new Error('Record does not exist')
   await RecordModel.updateOne(
-    { _id: mongoose.Types.ObjectId(id) },
+    { _id: new mongoose.Types.ObjectId(id) },
     { status: 'inStock' },
   );
   return await RecordModel.findById(id);
@@ -33,7 +33,7 @@ export async function setSold(_: any, { id }: { id: string }) {
   const record = await RecordModel.findById(id)
   if (!record) throw new Error('Record does not exist')
   await RecordModel.updateOne(
-    { _id: mongoose.Types.ObjectId(id) },
+    { _id: new mongoose.Types.ObjectId(id) },
     { status: 'sold' },
   );
   return await RecordModel.findById(id);

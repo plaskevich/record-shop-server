@@ -1,18 +1,13 @@
 import config from './config';
-import { GraphQLServer } from 'graphql-yoga';
+import { createServer } from '@graphql-yoga/node';
 import { resolvers } from './resolvers';
 import { UserModel } from './models/User';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-const schema = './src/schema.graphql';
-const chalk = require('chalk');
-const bodyParser = require('body-parser');
+import express from 'express';
+import { typeDefs } from './schema'
 
-mongoose.connect(config.mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+mongoose.connect(config.mongoUrl);
 
 mongoose.connection.on('connected', () => {
   console.log('✅\xa0 Connection Established\n');
@@ -25,34 +20,28 @@ mongoose.connection.on('error', () => {
 const context = async (req: any) => {
   const { request } = req;
   // get the user token from the headers
-  const token = request.headers.authorization;
-  // console.log(token)
+  const token = request.headers.get('authorization');
   // try to retrieve a user with the token
   if (token) {
     const currentUser = await getUserByToken(token);
-
     return { currentUser };
   } else return null;
 };
 
-const server = new GraphQLServer({
-  typeDefs: schema,
-  resolvers,
-  context,
-  resolverValidationOptions: { requireResolversForResolveType: false },
+const app = express()
+
+const server = createServer({
+  schema: {typeDefs, resolvers},
+  context
 });
+
+app.use('/graphql', server)
 
 const PORT = process.env.PORT || 5000;
 
-server.express.use(bodyParser.urlencoded({ extended: false }));
-server.express.use(bodyParser.json());
-
-server.start({ port: PORT }, async () => {
-  console.log(
-    '\n🚀\xa0 Server is running on: ' +
-    chalk.hex('#00bfff').underline(`http://localhost:${PORT}\n`),
-  );
-});
+app.listen(PORT, () => {
+  console.log(`\n🚀\xa0 Server is running on: http://localhost:${PORT}/graphql`)
+})
 
 async function getUserByToken(token: string) {
   if (!token) return null;
@@ -61,4 +50,4 @@ async function getUserByToken(token: string) {
   const currentUser = await UserModel.findById((userAuth as any).userId);
   if (currentUser) currentUser.id = currentUser._id
   return currentUser;
-};
+}
