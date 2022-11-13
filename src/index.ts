@@ -5,7 +5,7 @@ import { UserModel } from './models/User';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import express from 'express';
-import { typeDefs } from './schema'
+import { typeDefs } from './schema';
 
 mongoose.connect(config.mongoUrl);
 
@@ -28,26 +28,28 @@ const context = async (req: any) => {
   } else return null;
 };
 
-const app = express()
+const app = express();
 
 const server = createServer({
-  schema: {typeDefs, resolvers},
-  context
+  schema: { typeDefs, resolvers },
+  context,
 });
 
-app.use('/graphql', server)
+app.use('/graphql', server);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-  console.log(`\n🚀\xa0 Server is running on: http://localhost:${PORT}/graphql`)
-})
+  console.log(
+    `\n🚀\xa0 Server is running on: http://localhost:${PORT}/graphql`
+  );
+});
 
 async function getUserByToken(token: string) {
   if (!token) return null;
   token = token.replace('Bearer ', '');
   const userAuth = jwt.verify(token, 'secret');
   const currentUser = await UserModel.findById((userAuth as any).userId);
-  if (currentUser) currentUser.id = currentUser._id
+  if (currentUser) currentUser.id = currentUser._id;
   return currentUser;
 }
