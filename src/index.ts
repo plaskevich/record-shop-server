@@ -37,12 +37,10 @@ const server = createServer({
 
 app.use('/graphql', server);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(
-    `\n🚀\xa0 Server is running on: http://localhost:${PORT}/graphql`
-  );
+  console.log(`\n🚀\xa0 Server is running on PORT: ${PORT}`);
 });
 
 async function getUserByToken(token: string) {
