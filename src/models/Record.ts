@@ -23,7 +23,7 @@ class Record {
   notes!: string;
   @prop()
   img_uri!: string;
-  @prop({ required: true })
+  @prop()
   shop!: string;
 }
 

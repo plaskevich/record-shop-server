@@ -6,42 +6,42 @@ export async function addRecord(_: any, { data }: any, { currentUser }: any) {
   const newRecord = new RecordModel({
     ...data,
     date_added: new Date(),
-    shop: currentUser.shop,
+    // shop: currentUser.shop,
   });
   await newRecord.save();
   return newRecord;
 }
 
 export async function editRecord(_: any, { id, data }: any) {
-  const record = await RecordModel.findById(id)
-  if (!record) throw new Error('Record does not exist')
+  const record = await RecordModel.findById(id);
+  if (!record) throw new Error('Record does not exist');
   await RecordModel.updateOne({ _id: new mongoose.Types.ObjectId(id) }, data);
   return await RecordModel.findById(id);
 }
 
 export async function setInStock(_: any, { id }: { id: string }) {
-  const record = await RecordModel.findById(id)
-  if (!record) throw new Error('Record does not exist')
+  const record = await RecordModel.findById(id);
+  if (!record) throw new Error('Record does not exist');
   await RecordModel.updateOne(
     { _id: new mongoose.Types.ObjectId(id) },
-    { status: 'inStock' },
+    { status: 'inStock' }
   );
   return await RecordModel.findById(id);
 }
 
 export async function setSold(_: any, { id }: { id: string }) {
-  const record = await RecordModel.findById(id)
-  if (!record) throw new Error('Record does not exist')
+  const record = await RecordModel.findById(id);
+  if (!record) throw new Error('Record does not exist');
   await RecordModel.updateOne(
     { _id: new mongoose.Types.ObjectId(id) },
-    { status: 'sold' },
+    { status: 'sold' }
   );
   return await RecordModel.findById(id);
 }
 
 export async function removeRecord(_: any, { id }: { id: string }) {
-  const record = await RecordModel.findById(id)
-  if (!record) throw new Error('Record does not exist')
+  const record = await RecordModel.findById(id);
+  if (!record) throw new Error('Record does not exist');
   return RecordModel.findByIdAndDelete(id)
     .exec()
     .then((res: any) => {
