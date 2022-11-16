@@ -1,7 +1,5 @@
 import { RecordModel } from '../../models/Record';
-import { ShopModel } from '../../models/Shop';
 import { UserModel } from '../../models/User';
-import { checkUserShop } from './utils';
 import { GraphQLYogaError } from '@graphql-yoga/node';
 
 export async function getRecord(
@@ -12,8 +10,8 @@ export async function getRecord(
   if (!currentUser) throw new GraphQLYogaError('Invalid user');
   const record = await RecordModel.findById(id);
   if (!record) throw new GraphQLYogaError('Record not found');
-  // if (record.shop != currentUser.shop)
-  //   throw new GraphQLYogaError('No permission for selected record');
+  if (record.user != currentUser.id)
+    throw new Error('No permission for selected record');
   return record;
 }
 export async function getCollection(
@@ -24,18 +22,18 @@ export async function getCollection(
   if (!currentUser) throw new GraphQLYogaError('Invalid user');
   switch (filter) {
     case 'all': {
-      return await RecordModel.find({ shop: currentUser.shop });
+      return await RecordModel.find({ user: currentUser.id });
     }
     case 'inStock': {
       return await RecordModel.find({
         status: 'inStock',
-        shop: currentUser.shop,
+        user: currentUser.id,
       });
     }
     case 'sold': {
       return await RecordModel.find({
         status: 'sold',
-        shop: currentUser.shop,
+        user: currentUser.id,
       });
     }
     default:
@@ -46,7 +44,7 @@ export async function getStockRecords(_: any, data: any, { currentUser }: any) {
   if (!currentUser) throw new GraphQLYogaError('Invalid user');
   const records = await RecordModel.find({
     status: 'inStock',
-    shop: currentUser.shop,
+    user: currentUser.id,
   });
   if (!records) return new GraphQLYogaError('Records not found');
   return records;
@@ -55,18 +53,10 @@ export async function getSoldRecords(_: any, data: any, { currentUser }: any) {
   if (!currentUser) throw new GraphQLYogaError('Invalid user');
   const records = await RecordModel.find({
     status: 'sold',
-    shop: currentUser.shop,
+    user: currentUser.id,
   });
   if (!records) return new GraphQLYogaError('Records not found');
   return records;
-}
-
-export async function getShopUsers(_: any, data: any, { currentUser }: any) {
-  const users = await UserModel.find({ shop: currentUser.shop });
-  users.forEach((e: any) => {
-    e.id = e._id;
-  });
-  return users;
 }
 
 export async function getGenreStatistics(

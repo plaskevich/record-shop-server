@@ -8,11 +8,7 @@ class User {
   @prop({ required: true })
   password!: string;
   @prop()
-  name!: string;
-  @prop()
-  shop!: string;
-  @prop()
-  role!: string;
+  shopName!: string;
 }
 
 export const UserModel = getModelForClass(User);

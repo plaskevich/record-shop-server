@@ -24,7 +24,7 @@ class Record {
   @prop()
   img_uri!: string;
   @prop()
-  shop!: string;
+  user!: string;
 }
 
 export const RecordModel = getModelForClass(Record);

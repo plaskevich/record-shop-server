@@ -9,16 +9,13 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Mutation {
-    signUp(email: String!, password: String!, name: String): AuthData
+    signUp(email: String!, password: String!): AuthData
     signIn(email: String!, password: String!): AuthData
-    addShop(name: String!): Shop
     addRecord(data: RecordInput!): Record
     editRecord(id: String!, data: RecordInput!): Record
     setInStock(id: String!): Record
     setSold(id: String!): Record
     removeRecord(id: String!): Record
-    addUserToShop(email: String!, role: UserRole!): Boolean
-    changeUserRole(userId: String!, role: UserRole!): Boolean
     removeUser(userId: String!): Boolean
   }
 
@@ -55,8 +52,7 @@ export const typeDefs = /* GraphQL */ `
     id: String
     email: String
     name: String
-    shop: Shop
-    role: String
+    shopName: String
   }
 
   type Record {
@@ -74,11 +70,6 @@ export const typeDefs = /* GraphQL */ `
     img_uri: String
   }
 
-  type Shop {
-    id: String
-    name: String
-  }
-
   type GenreStatistic {
     genre: String
     records: [String]
@@ -88,10 +79,5 @@ export const typeDefs = /* GraphQL */ `
   enum Status {
     sold
     inStock
-  }
-
-  enum UserRole {
-    admin
-    regular
   }
 `;
