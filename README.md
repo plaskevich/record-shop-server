@@ -1,6 +1,6 @@
 # Record Shop Server
 
-GraphQL server for [Record Shop](https://github.com/plaskevich/record-shop)
+GraphQL server for [Record Shop](https://github.com/plaskevich/recordshop)
 
 #### Live server can be accessed at https://recordshop-bgn8.onrender.com/graphql
 
