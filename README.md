@@ -17,7 +17,7 @@ GraphQL server for [Record Shop](https://github.com/plaskevich/recordshop)
 1. In the root of the project create a file named `.env`
 2. Set the `.env` file with credentials:
 
-```
+```dotenv
 PORT = <port>
 MONGO_URI = mongodb+srv://plvster:UhnYqiwwIfWlGuqf@recordshop.sg0ry.mongodb.net/recordshop
 ```
