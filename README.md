@@ -10,7 +10,9 @@ GraphQL server for [Record Shop](https://github.com/plaskevich/recordshop)
 
 ### 1. Install dependencies
 
-`yarn`
+```
+yarn
+```
 
 ### 2. Set credentials
 
